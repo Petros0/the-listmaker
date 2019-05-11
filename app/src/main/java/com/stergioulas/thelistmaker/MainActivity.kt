@@ -1,29 +1,29 @@
-@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-
 package com.stergioulas.thelistmaker
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var textMessage: TextView
+    // navigation listener
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                textMessage.setText(R.string.title_agenda)
+                replaceFragment(BlankFragment.newInstance(), R.id.container)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                textMessage.setText(R.string.title_lists)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                textMessage.setText(R.string.title_settings)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -35,15 +35,44 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        val mActionBar = supportActionBar
-        mActionBar!!.setDisplayShowHomeEnabled(false)
-        mActionBar.setDisplayShowTitleEnabled(false)
 
-        val mInflater = LayoutInflater.from(this)
-        val mCustomview = mInflater.inflate(R.layout.actionbar, null)
+        supportActionBar!!.changeLayout(R.layout.actionbar, this)
 
-        mActionBar.customView = mCustomview
-        mActionBar.setDisplayShowCustomEnabled(true)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        navView.selectedItemId = R.id.navigation_home
     }
+
+}
+
+/**
+ * FragmentManager extension, to always have a transaction when want to change fragment.
+ */
+
+private fun FragmentManager.inTransaction(lambdaFunc: FragmentTransaction.() -> Unit) {
+    val fragmentTransaction = beginTransaction()
+    fragmentTransaction.lambdaFunc()
+    fragmentTransaction.commit()
+}
+
+/**
+ *
+ */
+fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
+    supportFragmentManager.inTransaction { add(frameId, fragment) }
+}
+
+
+fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
+    supportFragmentManager.inTransaction { replace(frameId, fragment) }
+}
+
+fun ActionBar.changeLayout(newLayout: Int, context: Context) {
+    val mInflater = LayoutInflater.from(context)
+    val mCustomview = mInflater.inflate(newLayout, null)
+
+    this.customView = mCustomview
+
+    this.setDisplayShowCustomEnabled(true)
+    this.setDisplayShowHomeEnabled(false)
+    this.setDisplayShowTitleEnabled(false)
 }
