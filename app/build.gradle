@@ -42,4 +42,7 @@ dependencies {
     // other libraries, worth mentioning.
 
     implementation 'com.applandeo:material-calendar-view:1.6.0'
+    // second calendar
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+
 }

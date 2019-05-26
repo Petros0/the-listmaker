@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
 class BlankFragment : androidx.fragment.app.Fragment() {
 
     private var listener: OnFragmentInteractionListener? = null
-    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,13 +96,13 @@ class BlankFragment : androidx.fragment.app.Fragment() {
         fun newInstance() = BlankFragment()
     }
 
-    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var textViewDayOfWeek: TextView = itemView.findViewById<View>(R.id.day_of_week_textview) as TextView
         internal var textviewDateNumber: TextView = itemView.findViewById<View>(R.id.date_number_textview) as TextView
     }
 
     class ListAdapter(private val list: List<String>) :
-        androidx.recyclerview.widget.RecyclerView.Adapter<ViewHolder>() {
+        RecyclerView.Adapter<ViewHolder>() {
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 

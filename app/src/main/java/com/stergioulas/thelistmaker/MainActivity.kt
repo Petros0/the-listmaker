@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        supportActionBar!!.changeLayout(R.layout.actionbar, this)
+        supportActionBar!!.initLayout(R.layout.actionbar, this)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         navView.selectedItemId = R.id.navigation_agenda
@@ -46,29 +47,22 @@ class MainActivity : AppCompatActivity() {
 
 }
 
+// Helper methods.
+
 /**
  * FragmentManager extension, to always have a transaction when want to change fragment.
  */
-
 private fun androidx.fragment.app.FragmentManager.inTransaction(lambdaFunc: androidx.fragment.app.FragmentTransaction.() -> Unit) {
     val fragmentTransaction = beginTransaction()
     fragmentTransaction.lambdaFunc()
     fragmentTransaction.commit()
 }
 
-/**
- *
- */
-fun AppCompatActivity.addFragment(fragment: androidx.fragment.app.Fragment, frameId: Int) {
-    supportFragmentManager.inTransaction { add(frameId, fragment) }
-}
-
-
-fun AppCompatActivity.replaceFragment(fragment: androidx.fragment.app.Fragment, frameId: Int) {
+fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { replace(frameId, fragment) }
 }
 
-fun ActionBar.changeLayout(newLayout: Int, context: Context) {
+fun ActionBar.initLayout(newLayout: Int, context: Context) {
     val mInflater = LayoutInflater.from(context)
     val mCustomview = mInflater.inflate(newLayout, null)
 
