@@ -2,14 +2,11 @@ package com.stergioulas.thelistmaker
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity() {
  * FragmentManager extension, to always have a transaction when want to change fragment.
  */
 
-private fun FragmentManager.inTransaction(lambdaFunc: FragmentTransaction.() -> Unit) {
+private fun androidx.fragment.app.FragmentManager.inTransaction(lambdaFunc: androidx.fragment.app.FragmentTransaction.() -> Unit) {
     val fragmentTransaction = beginTransaction()
     fragmentTransaction.lambdaFunc()
     fragmentTransaction.commit()
@@ -62,12 +59,12 @@ private fun FragmentManager.inTransaction(lambdaFunc: FragmentTransaction.() -> 
 /**
  *
  */
-fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
+fun AppCompatActivity.addFragment(fragment: androidx.fragment.app.Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { add(frameId, fragment) }
 }
 
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
+fun AppCompatActivity.replaceFragment(fragment: androidx.fragment.app.Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { replace(frameId, fragment) }
 }
 
