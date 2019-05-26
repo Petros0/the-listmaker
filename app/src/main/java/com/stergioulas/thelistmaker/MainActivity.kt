@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,14 +17,18 @@ class MainActivity : AppCompatActivity() {
     // navigation listener
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_agenda -> {
+                Toast.makeText(this, "Agenda/Home", Toast.LENGTH_SHORT).show()
+                replaceFragment(CalendarFragment.newInstance(), R.id.container)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_lists -> {
+                Toast.makeText(this, "Lists", Toast.LENGTH_SHORT).show()
                 replaceFragment(BlankFragment.newInstance(), R.id.container)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
+            R.id.navigation_settings -> {
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -39,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.changeLayout(R.layout.actionbar, this)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navView.selectedItemId = R.id.navigation_home
+        navView.selectedItemId = R.id.navigation_agenda
     }
 
 }

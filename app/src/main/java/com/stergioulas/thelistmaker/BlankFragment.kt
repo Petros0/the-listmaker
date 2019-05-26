@@ -111,7 +111,6 @@ class BlankFragment : Fragment() {
         }
 
         override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-
             p0.textViewDayOfWeek.text = "Bla"
             p0.textviewDateNumber.text = "Blo"
         }
