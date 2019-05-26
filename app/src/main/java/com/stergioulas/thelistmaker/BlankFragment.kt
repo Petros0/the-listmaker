@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,8 +41,8 @@ class BlankFragment : androidx.fragment.app.Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view)
 
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = RecyclerView.VERTICAL
         recyclerView.layoutManager = layoutManager
 
         val listOf = listOf("Bla", "bla", "bla", "bla")
