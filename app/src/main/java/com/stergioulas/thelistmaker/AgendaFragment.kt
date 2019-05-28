@@ -37,7 +37,7 @@ class BlankFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_blank_recycler, container, false)
+        val view = inflater.inflate(R.layout.fragment_agenda, container, false)
 
         recyclerView = view.findViewById(R.id.recycler_view)
 
@@ -106,7 +106,7 @@ class BlankFragment : androidx.fragment.app.Fragment() {
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
-            val view = LayoutInflater.from(p0.context).inflate(R.layout.fragment_blank_recycler_item, p0, false)
+            val view = LayoutInflater.from(p0.context).inflate(R.layout.fragment_agenda_item, p0, false)
 
             return ViewHolder(view)
         }

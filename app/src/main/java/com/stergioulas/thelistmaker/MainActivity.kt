@@ -16,13 +16,13 @@ class MainActivity : AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_agenda -> {
-                Toast.makeText(this, "Agenda/Home", Toast.LENGTH_SHORT).show()
-                replaceFragment(CalendarFragment.newInstance(), R.id.container)
+                Toast.makeText(this, "Agenda", Toast.LENGTH_SHORT).show()
+                replaceFragment(BlankFragment.newInstance(), R.id.container)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_lists -> {
+                // TODO, similar to Timetree.
                 Toast.makeText(this, "Lists", Toast.LENGTH_SHORT).show()
-                replaceFragment(BlankFragment.newInstance(), R.id.container)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_settings -> {
